@@ -6,7 +6,7 @@ This program was built to quicken the chord writing process in the church I visi
 
 ## Screenshots ##
 <div>
-  <img src="/screenshots/screenshot1.png" width="520">
+  <img src="/screenshots/screenshot1.png" width="640px">
 </div>
 
 ## Installation ##
@@ -22,11 +22,11 @@ Steps:
 3. Enter one of the following commands:
 
 	```
-		> pip install .
+	> pip install .
 
-	    OR
-
-      > python3 -m pip install .
+    	OR
+	    
+	> python3 -m pip install .
 	```
 
 ## Usage ##
@@ -37,5 +37,5 @@ Steps:
 2. Enter the following commands:
 
 	```
-		> numchord [-i | --input] <file.docx> [-k | --key] {A,A#,B,C,C#,D,D#,E,F,F#,G,G#}
+		> numchord [-i | --input] <file.docx> [-k | --key] { A, A#, B, C, C#, D, D#, E, F, F#, G, G# }
 	```
