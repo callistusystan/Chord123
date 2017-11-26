@@ -6,7 +6,7 @@ This program was built to quicken the chord writing process in the church I visi
 
 ## Screenshots ##
 <div>
-  <img src="/screenshots/screenshot1.png" width="520">
+  <img src="/screenshots/screenshot1.png" width="100%">
 </div>
 
 ## Installation ##
