@@ -10,8 +10,8 @@ def translate(inputFile, key, outputFile):
 
 def main():
     parser = ArgumentParser()
-    parser.add_argument('-i', '--input', help='Path of file to translate')
-    parser.add_argument('-k', '--key', help='Key to translate into')
+    parser.add_argument('-i', '--input', help='path of file to translate')
+    parser.add_argument('-k', '--key', help='key to translate into')
     args = parser.parse_args()
 
     if args.input is None or args.key is None:
