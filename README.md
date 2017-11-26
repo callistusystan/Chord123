@@ -1,8 +1,10 @@
-# NumChord #
+# Chord123 #
 
-NumChord is a command line tool built with Python, that translates chords from the number system to chords in specific keys. Currently, it only works for .docx file types.
+Chord123 is a command line tool built with Python, that translates chords from the number system to chords in specific keys. Currently, it only works for .docx file types.
 
 This program was built to quicken the chord writing process in the church I visit.
+
+The name Chord123, refers to chords and numbers, and the fact that this app makes the translation between them easy as 1 2 3! :smile:
 
 ## Screenshots ##
 <div>
@@ -25,7 +27,7 @@ Steps:
 	> pip install .
 
     	OR
-	    
+
 	> python3 -m pip install .
 	```
 
@@ -37,5 +39,5 @@ Steps:
 2. Enter the following commands:
 
 	```
-		> numchord [-i | --input] <file.docx> [-k | --key] { A, A#, B, C, C#, D, D#, E, F, F#, G, G# }
+		> chord123 [-i | --input] <file.docx> [-k | --key] { A, A#, B, C, C#, D, D#, E, F, F#, G, G# }
 	```

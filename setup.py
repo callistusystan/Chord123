@@ -1,13 +1,13 @@
 from setuptools import setup
 
-setup(name='numchord',
+setup(name='Chord123',
       version='0.1',
       description='A command line script to translate a .docx of number-system chords to a specified key',
       author='Callistus Tan',
       author_email='callistusystan@example.com',
       license='MIT',
       entry_points = {
-        "console_scripts": ['numchord = numchord.numchord:main']
+        "console_scripts": ['chord123 = chord123.chord123:main']
         },
-      packages=['numchord'],
+      packages=['chord123'],
       zip_safe=False)

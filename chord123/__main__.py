@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
-from .numchord import main
+from .chord123 import main
 main()
