@@ -4,7 +4,7 @@ Chord123 is a command line tool built with Python, that translates chords from t
 
 This program was built to quicken the chord writing process in the church I visit.
 
-The name Chord123, refers to chords and numbers, and the fact that this app makes the translation between them easy as 1 2 3! :smile:
+The name Chord123, refers to chords and numbers, and that this app makes translation easy as 1 2 3! :smile:
 
 ## Screenshots ##
 <div>
