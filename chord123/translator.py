@@ -51,14 +51,15 @@ class Translator:
     def parse(self):
         lines = self.content.split('\n')
 
-        keyId = KEYS.index(self.key)
+        origKeyId = KEYS.index(self.key)
+        keyId = origKeyId
 
         output = ''
         for line in lines:
             newLine = ''
             if '+' in line:
                 [transposeBy] = re.findall(r"([0-9]+)", line)
-                keyId = (keyId+int(transposeBy))%12
+                keyId = (origKeyId+int(transposeBy))%12
             else:
                 newLine = re.sub(r"([0-9][^\s]*)", lambda number: self.translate(number.group(0), keyId), line)
             output += newLine + '\n'
