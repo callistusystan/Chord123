@@ -15,21 +15,23 @@ class DocumentHandler:
         return '\n'.join(content)
 
     def save(self, content, filename):
+        t = Translator()
+
         document = Document()
         endOfLine1 = content.index('\n')
 
         # get heading and body
-        heading = content[:endOfLine1]
-        body = content[endOfLine1+1:]
-        lines = body.split('\n')
-        while lines[0] == '':
-            lines.pop(0)
+        body = content.split('\n')
+        heading = []
+        while body[0] == '' or not t.isMusical(body[0]):
+            if body[0] != '':
+                heading.append(body[0])
+            body.pop(0)
 
         # start writing
         document.add_heading(heading, 0)
-        t = Translator()
         p = document.add_paragraph()
-        for line in lines:
+        for line in body:
             if line == '':
                 p = document.add_paragraph()
             else:
