@@ -2,11 +2,23 @@ from argparse import ArgumentParser
 from .doc_handler import DocumentHandler
 from .translator import Translator
 
+'''
+Function that translates the inputFile into the specified key.
+
+
+'''
 def translate(inputFile, key, outputFile):
     dh = DocumentHandler(inputFile)
     tr = Translator(dh.content, key)
     output = tr.parse()
     dh.save(output, outputFile)
+
+def getOutputName(inputFile, key):
+    dotPos = inputFile.index('.')
+    name = inputFile[:dotPos]
+    extension = inputFile[dotPos:]
+
+    return "{} ({}){}".format(name, key, extension)
 
 def main():
     parser = ArgumentParser()
@@ -18,8 +30,4 @@ def main():
         print("Insufficient arguments")
         return
 
-    dotPos = args.input.index('.')
-    name = args.input[:dotPos]
-    extension = args.input[dotPos:]
-
-    translate(args.input, args.key, "{} ({}){}".format(name, args.key, extension))
+    translate(args.input, args.key, getOutputName(args.input, args.key))

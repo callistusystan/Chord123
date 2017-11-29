@@ -64,6 +64,6 @@ class Translator:
                 [transposeBy] = re.findall(r"([0-9]+)", line)
                 keyId = (origKeyId+int(transposeBy))%12
             else:
-                newLine = re.sub(r"([0-9][^\s]*)", lambda number: self.translate(number.group(0), keyId), line)
+                newLine = re.sub(r"([0-9](?!x)[^\s]*)", lambda number: self.translate(number.group(0), keyId), line)
             output += newLine + '\n'
         return output
