@@ -1,6 +1,6 @@
 from docx import Document
 from docx.shared import RGBColor, Pt
-from .translator import Translator
+from .music_theory import isMusical, hasChords
 
 class DocumentHandler:
     def __init__(self, path):
@@ -15,15 +15,13 @@ class DocumentHandler:
         return '\n'.join(content)
 
     def save(self, content, filename):
-        t = Translator()
-
         document = Document()
         endOfLine1 = content.index('\n')
 
         # get heading and body
         body = content.split('\n')
         heading = []
-        while body[0] == '' or not t.isMusical(body[0]):
+        while body[0] == '' or not isMusical(body[0]):
             if body[0] != '':
                 heading.append(body[0])
             body.pop(0)
@@ -37,7 +35,7 @@ class DocumentHandler:
             else:
                 run = p.add_run(line+'\n')
                 run.font.size = Pt(14)
-                if t.hasChords(line):
+                if hasChords(line):
                     run.bold = True
                     run.font.color.rgb = RGBColor(0, 0, 0xFF)
 

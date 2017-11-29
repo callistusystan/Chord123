@@ -1,8 +1,5 @@
 import re
-
-KEYS = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
-MODE = ['', 'm', 'm', '', '', 'm', 'dim']
-INCREMENT = [0, 2, 4, 5, 7, 9, 11];
+from .music_theory import KEYS, MODE, INCREMENT, hasChords, isMusical
 
 class Translator:
     def __init__(self, content='', key='A'):
@@ -44,12 +41,6 @@ class Translator:
             bassNum = numbers[1]
             return "{}/{}".format(chord, self.numToChord(bassNum, keyId, False))
         return chord
-
-    def hasChords(self, line):
-        return bool(re.search(r"[A-G](?![A-Zac-z])[#b]?[Mm]?", line))
-
-    def isMusical(self, line):
-        return bool(re.search(r"[A-G](?![A-Zac-z])[#b]?[Mm]?", line)) or bool(re.search(r"\+[0-12]", line))
 
     def parse(self):
         lines = self.content.split('\n')

@@ -1,11 +1,11 @@
+import re
 from argparse import ArgumentParser
 from .doc_handler import DocumentHandler
 from .translator import Translator
+from .transposer import Transposer
 
 '''
-Function that translates the inputFile into the specified key.
-
-
+Function that translates the input numbers file into the specified key.
 '''
 def translate(inputFile, key, outputFile):
     dh = DocumentHandler(inputFile)
@@ -13,7 +13,17 @@ def translate(inputFile, key, outputFile):
     output = tr.parse()
     dh.save(output, outputFile)
 
+'''
+Function that transposes the input chord file into the specified key.
+'''
+def transpose(inputFile, origKey, newKey, outputFile):
+    dh = DocumentHandler(inputFile)
+    tr = Transposer(dh.content, origKey, newKey)
+    output = tr.parse()
+    dh.save(output, outputFile)
+
 def getOutputName(inputFile, key):
+    inputFile = re.sub(r"\s+\([A-G][#b]?\)", '', inputFile)
     dotPos = inputFile.index('.')
     name = inputFile[:dotPos]
     extension = inputFile[dotPos:]
@@ -22,12 +32,15 @@ def getOutputName(inputFile, key):
 
 def main():
     parser = ArgumentParser()
-    parser.add_argument('-i', '--input', help='path of file to translate')
-    parser.add_argument('-k', '--key', help='key to translate into')
+    parser.add_argument('-t1', '--transpose', help='transpose from key to key', nargs=3)
+    parser.add_argument('-t2', '--translate', help='translate from number system to chords', nargs=2)
     args = parser.parse_args()
 
-    if args.input is None or args.key is None:
-        print("Insufficient arguments")
-        return
-
-    translate(args.input, args.key, getOutputName(args.input, args.key))
+    if args.transpose is not None:
+        inputFile, key1, key2 = args.transpose
+        transpose(inputFile, key1, key2, getOutputName(inputFile, key2))
+    elif args.translate is not None:
+        inputFile, key = args.translate
+        translate(inputFile, key, getOutputName(inputFile, key))
+    else:
+        print("Invalid command: For help, enter chord123 --help")
