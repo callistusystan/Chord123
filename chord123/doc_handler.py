@@ -1,6 +1,6 @@
 from docx import Document
 from docx.shared import RGBColor, Pt
-from .music_theory import isMusical, hasChords
+from .music_theory import isMusical, isSection, hasChords
 
 class DocumentHandler:
     def __init__(self, path):
@@ -21,7 +21,7 @@ class DocumentHandler:
         # get heading and body
         body = content.split('\n')
         heading = []
-        while body[0] == '' or not isMusical(body[0]):
+        while len(body) > 0 and (body[0] == '' or (isMusical(body[0]) or isSection(body[0])) == False):
             if body[0] != '':
                 heading.append(body[0])
             body.pop(0)

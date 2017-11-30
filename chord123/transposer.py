@@ -31,6 +31,6 @@ class Transposer:
         output = ''
         for line in lines:
             newLine = ''
-            newLine = re.sub(r"([A-G](?![A-Zac-z])[#b]?)", lambda chord: self.transpose(chord.group(0), increment), line)
+            newLine = re.sub(r"(?<![A-Za-z])([A-G](?![A-Zac-z])[#b]?)", lambda chord: self.transpose(chord.group(0), increment), line)
             output += newLine + '\n'
         return output
