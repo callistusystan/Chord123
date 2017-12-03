@@ -9,18 +9,18 @@ Function that translates the input numbers file into the specified key.
 '''
 def translate(inputFile, key, outputFile):
     dh = DocumentHandler(inputFile)
-    tr = Translator(dh.content, key)
+    tr = Translator(dh.document, key)
     output = tr.parse()
-    dh.save(output, outputFile)
+    dh.save(outputFile)
 
 '''
 Function that transposes the input chord file into the specified key.
 '''
 def transpose(inputFile, origKey, newKey, outputFile):
     dh = DocumentHandler(inputFile)
-    tr = Transposer(dh.content, origKey, newKey)
-    output = tr.parse()
-    dh.save(output, outputFile)
+    tr = Transposer(dh.document, origKey, newKey)
+    tr.parse()
+    dh.save(outputFile)
 
 def getOutputName(inputFile, key):
     inputFile = re.sub(r"\s+\([A-G][#b]?\)", '', inputFile)

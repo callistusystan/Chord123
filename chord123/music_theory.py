@@ -1,6 +1,7 @@
 import re
 
-KEYS = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
+KEYS_SHARP = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
+KEYS_FLAT = ['A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab']
 MODE = ['', 'm', 'm', '', '', 'm', 'dim']
 INCREMENT = [0, 2, 4, 5, 7, 9, 11];
 

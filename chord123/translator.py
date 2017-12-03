@@ -1,9 +1,9 @@
 import re
-from .music_theory import KEYS, MODE, INCREMENT, hasChords, isMusical
+from .music_theory import KEYS_SHARP, MODE, INCREMENT, hasChords, isMusical
 
 class Translator:
-    def __init__(self, content='', key='A'):
-        self.content = content
+    def __init__(self, document=None, key='A'):
+        self.document = document
         self.key = key
 
     def numToChord(self, chordNum, keyId, doMode):
@@ -18,19 +18,19 @@ class Translator:
         elif 'b' in chordNum:
             chordId -= 1
         if not doMode:
-            return KEYS[chordId%12]
+            return KEYS_SHARP[chordId%12]
 
         # check if mode explicitly defined
         if 'M' in chordNum:
-            return KEYS[chordId%12]
+            return KEYS_SHARP[chordId%12]
         elif 'm' in chordNum:
-            return KEYS[chordId%12]+'m'
+            return KEYS_SHARP[chordId%12]+'m'
 
         # compute manually
         if '#' in chordNum or 'b' in chordNum:
-            return KEYS[chordId%12]
+            return KEYS_SHARP[chordId%12]
 
-        return "{}{}".format(KEYS[chordId%12], MODE[j])
+        return "{}{}".format(KEYS_SHARP[chordId%12], MODE[j])
 
     def translate(self, number, keyId):
         numbers = number.split('/');
@@ -39,22 +39,21 @@ class Translator:
         chord = self.numToChord(chordNum, keyId, True)
         if len(numbers) == 2:
             bassNum = numbers[1]
-            return "{}/{}".format(chord, self.numToChord(bassNum, keyId, False))
+            if bassNum == '':
+                return "{}/".format(chord)
+            else:
+                return "{}/{}".format(chord, self.numToChord(bassNum, keyId, False))
         return chord
 
     def parse(self):
-        lines = self.content.split('\n')
-
-        origKeyId = KEYS.index(self.key)
+        origKeyId = KEYS_SHARP.index(self.key)
         keyId = origKeyId
 
-        output = ''
-        for line in lines:
-            newLine = ''
-            if '+' in line:
-                [transposeBy] = re.findall(r"([0-9]+)", line)
-                keyId = (origKeyId+int(transposeBy))%12
-            else:
-                newLine = re.sub(r"([0-9](?!x)[^\s]*)", lambda number: self.translate(number.group(0), keyId), line)
-            output += newLine + '\n'
-        return output
+        for p in self.document.paragraphs:
+            inline = p.runs
+            for i in range(len(inline)):
+                if '+' in inline[i].text:
+                    [transposeBy] = re.findall(r"([0-9]+)", inline[i].text)
+                    keyId = (origKeyId+int(transposeBy))%12
+                else:
+                    inline[i].text = re.sub(r"([0-9](?!x)[^\s]*)", lambda number: self.translate(number.group(0), keyId), inline[i].text)

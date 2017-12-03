@@ -39,5 +39,6 @@ Steps:
 2. Enter the following commands:
 
 	```
-		> chord123 [-i | --input] <file.docx> [-k | --key] { A, A#, B, C, C#, D, D#, E, F, F#, G, G# }
+		> chord123 [--transpose] <file.docx> <original_key> <transpose_key>
+		NOTE: key should be in { A, A#, B, C, C#, D, D#, E, F, F#, G, G# }
 	```
